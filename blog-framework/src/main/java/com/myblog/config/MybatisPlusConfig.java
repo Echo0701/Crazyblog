@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 //配置MyBatisPlus的分页插件，使得支持分页查询
 public class MybatisPlusConfig {
     @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+    public MybatisPlusInterceptor mybatisPlusInterceptor(){
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         return mybatisPlusInterceptor;
