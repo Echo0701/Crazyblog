@@ -30,11 +30,29 @@ public class ArticleController {
     }
 
     // --------------------- 测试 统一响应格式 -------------------
+
+    /**
+     * 查询热门文章
+     * @return
+     */
     @GetMapping("/hotArticleList")
     public ResponseResult hotArticleList() {
         //查询热门文章，封装成ResponseResult 返回
         ResponseResult result = articleService.hotArticleList();
         return result;
+    }
+
+//-----------------------------------分页查询文章列表-------------------------------------
+    /**
+     * 分页查询文章列表
+     * @param pageNum
+     * @param pageSize
+     * @param categoryId
+     * @return
+     */
+    @GetMapping("/articleList")
+    public ResponseResult articleList(Integer pageNum, Integer pageSize, Long categoryId) {
+        return articleService.articleList(pageNum, pageSize, categoryId);
     }
 
 }
