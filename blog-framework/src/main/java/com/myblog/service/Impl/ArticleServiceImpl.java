@@ -11,6 +11,7 @@ import com.myblog.domain.ResponseResult;
 import com.myblog.service.ArticleService;
 import com.myblog.service.CategoryService;
 import com.myblog.utils.BeanCopyUtils;
+import com.myblog.vo.ArticleDetailVo;
 import com.myblog.vo.ArticleListVo;
 import com.myblog.vo.HotArticleVO;
 import com.myblog.vo.PageVo;
@@ -126,5 +127,31 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //把上面那行的查询结果和文章总数封装在PageVo(我们写的实体类)
         PageVo pageVo = new PageVo(articleListVos,page.getTotal());
         return ResponseResult.okResult(pageVo);
+    }
+
+    /**
+     * 根据id查询文章详情
+     * @param id
+     * @return
+     */
+    public ResponseResult getArticleDetail(Long id) {
+
+        //根据 id 查询文章
+        Article article = getById(id);
+
+        //把最后的查询结果封装成ArticleDetailVo,BeanCopyUtils是我们写的工具类
+        ArticleDetailVo articleDetailVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
+
+        //根据分类 id ,来查询分类名
+        Long categoryId = articleDetailVo.getCategoryId();
+        Category category = categoryService.getById(categoryId);
+
+        //如果根据分类id查询的到分类名，那么就把查询到的值设置给ArticleDetailVo实体类的categoryName字段
+        if(category!=null){
+            articleDetailVo.setCategoryName(category.getName());
+        }
+
+        //封装响应返回
+        return ResponseResult.okResult(articleDetailVo);
     }
 }
