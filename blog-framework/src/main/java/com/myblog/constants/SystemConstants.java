@@ -24,4 +24,8 @@ public class SystemConstants {
      */
     public static final int ARTICLE_STATUS_SIZE = 10;
 
+    /**
+     * 分类表的分类状态是正常状态
+     */
+    public static final String STATUS_NORMAL = "0";
 }
