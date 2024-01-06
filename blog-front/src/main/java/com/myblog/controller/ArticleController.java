@@ -1,6 +1,7 @@
 package com.myblog.controller;
 
 import com.myblog.domain.Article;
+import com.myblog.domain.ResponseResult;
 import com.myblog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    // ----------------------测试 mybatisPlus ----------------
     /**
      * 查询数据库的所有数据
      * @return
@@ -26,4 +28,13 @@ public class ArticleController {
     public List<Article> test() {
         return articleService.list();
     }
+
+    // --------------------- 测试 统一响应格式 -------------------
+    @GetMapping("/hotArticleList")
+    public ResponseResult hotArticleList() {
+        //查询热门文章，封装成ResponseResult 返回
+        ResponseResult result = articleService.hotArticleList();
+        return result;
+    }
+
 }
